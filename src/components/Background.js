@@ -26,4 +26,5 @@ const HouseImage = styled.img`
   height: 50vh;
   transform: translate(-50%, 0);
   cursor: pointer;
+  z-index: 1;
 `;
