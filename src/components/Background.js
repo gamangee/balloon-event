@@ -4,7 +4,7 @@ import Clouds from "./Clouds";
 import { motion } from "framer-motion";
 
 const houseVariants = {
-  initial: { x: "-50%", y: "0" },
+  initial: { x: "0", y: "0" },
   flyAway: { y: "-100vh", transition: { duration: 3 } },
 };
 
@@ -12,31 +12,35 @@ export default function Background({ handleHouseClick, houseFloating }) {
   return (
     <Container>
       <Clouds />
-      <HouseImage
-        onClick={handleHouseClick}
-        src="/images/home.png"
-        variants={houseVariants}
-        initial="initial"
-        animate={houseFloating ? "flyAway" : "initial"}
-      ></HouseImage>
+      <House>
+        <HouseImage
+          onClick={handleHouseClick}
+          src="/images/home.png"
+          variants={houseVariants}
+          initial="initial"
+          animate={houseFloating ? "flyAway" : "initial"}
+        />
+      </House>
     </Container>
   );
 }
 
 const Container = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100vh;
   background: ${({ theme }) =>
     `linear-gradient(${theme.colors.skyblueTop}, ${theme.colors.skyblueBottom})`};
 `;
 
+const House = styled.div`
+  margin: 0 auto;
+  margin-top: -420px;
+  display: flex;
+  align-items: flex-end;
+  width: 320px;
+  height: 420px;
+`;
+
 const HouseImage = styled(motion.img)`
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  height: 50vh;
+  width: 100%;
   cursor: pointer;
-  z-index: 10;
+  z-index: 1;
 `;

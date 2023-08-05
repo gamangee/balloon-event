@@ -3,8 +3,8 @@ import React from "react";
 import styled from "styled-components";
 
 const originBallonVariants = (left) => {
-  const leftPercentage = parseFloat(left.split("v")[0]);
-  const moveDirection = leftPercentage < 50 ? 4 : -4;
+  const leftPercentage = parseFloat(left.split("p")[0]);
+  const moveDirection = leftPercentage < window.innerWidth / 2 ? 4 : -4;
   return {
     hidden: {
       scale: 1,

@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
 const balloonVariants = (left) => {
-  const leftPercentage = parseFloat(left.split("v")[0]);
-  const moveDirection = leftPercentage < 50 ? 4 : -4;
+  const leftPercentage = parseFloat(left.split("p")[0]);
+  const moveDirection = leftPercentage < window.innerWidth / 2 ? 4 : -4;
 
   return {
     hidden: {
@@ -95,5 +95,10 @@ const Balloon = styled(motion.div).withConfig({
     border-right: 4px solid transparent;
     border-bottom: 6px solid ${(props) => props.color};
     transform: translate(-50%);
+  }
+
+  &:hover {
+    border: 2px solid ${(props) => props.color};
+    transform: scale(1.1);
   }
 `;

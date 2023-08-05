@@ -20,9 +20,9 @@ const originBalloons = [
     gradient: "linear-gradient(135deg, #ffffc1, #ffff00)",
     shadow: "#ffd103",
     size: "90",
-    top: "38%",
-    left: "32vw",
-    deg: "-26deg",
+    top: "300px",
+    left: "450px",
+    deg: "-30deg",
   },
   {
     id: id(),
@@ -30,18 +30,18 @@ const originBalloons = [
     gradient: "linear-gradient(155deg, #eeffe4, #62ff07)",
     shadow: "#62ff07",
     size: "80",
-    top: "45%",
-    left: "35vw",
-    deg: "-30deg",
+    top: "400px",
+    left: "500px",
+    deg: "-40deg",
   },
   {
     id: id(),
     color: "#00d0ff",
     gradient: "linear-gradient(95deg, #c4f7ff, #00d0ff)",
     shadow: "#00d0ff",
-    size: "70",
-    top: "20%",
-    left: "36vw",
+    size: "90",
+    top: "200px",
+    left: "520px",
     deg: "-15deg",
   },
   {
@@ -50,8 +50,8 @@ const originBalloons = [
     gradient: "linear-gradient(125deg, #ffc7c0, #ff5752)",
     shadow: "#ff5752",
     size: "100",
-    top: "20%",
-    left: "42vw",
+    top: "120px",
+    left: "580px",
     deg: "-5deg",
   },
   {
@@ -60,8 +60,8 @@ const originBalloons = [
     gradient: "linear-gradient(110deg, #fbe2ff, #f399ff)",
     shadow: "#f399ff",
     size: "60",
-    top: "35%",
-    left: "40vw",
+    top: "320px",
+    left: "580px",
     deg: "-10deg",
   },
   {
@@ -70,8 +70,8 @@ const originBalloons = [
     gradient: "linear-gradient(110deg, #e9e4ff, #9881ff)",
     shadow: "#9881ff",
     size: "80",
-    top: "28%",
-    left: "46vw",
+    top: "220px",
+    left: "660px",
     deg: "7deg",
   },
   {
@@ -80,8 +80,8 @@ const originBalloons = [
     gradient: "linear-gradient(135deg, #ffffc1, #ffff00)",
     shadow: "#ffd103",
     size: "70",
-    top: "42%",
-    left: "48vw",
+    top: "320px",
+    left: "680px",
     deg: "8deg",
   },
   {
@@ -89,9 +89,9 @@ const originBalloons = [
     color: "#00dc25",
     gradient: "linear-gradient(125deg, #cfffcf, #00dc25)",
     shadow: "#00dc25",
-    size: "90",
-    top: "20%",
-    left: "55vw",
+    size: "110",
+    top: "130px",
+    left: "790px",
     deg: "16deg",
   },
   {
@@ -99,9 +99,9 @@ const originBalloons = [
     color: "#ff6e07",
     gradient: "linear-gradient(155deg, #ffe0c9, #ff6e07)",
     shadow: "#ff6e07",
-    size: "80",
-    top: "29%",
-    left: "53vw",
+    size: "60",
+    top: "290px",
+    left: "770px",
     deg: "15deg",
   },
   {
@@ -109,9 +109,9 @@ const originBalloons = [
     color: "#ff99e7",
     gradient: "linear-gradient(110deg, #ffe2f8, #ff99e7)",
     shadow: "#ff99e7",
-    size: "90",
-    top: "32%",
-    left: "60vw",
+    size: "80",
+    top: "270px",
+    left: "860px",
     deg: "30deg",
   },
   {
@@ -119,9 +119,9 @@ const originBalloons = [
     color: "#1a85ff",
     gradient: "linear-gradient(95deg, #afd4ff, #1a85ff)",
     shadow: "#1a85ff",
-    size: "80",
-    top: "46%",
-    left: "58vw",
+    size: "60",
+    top: "370px",
+    left: "810px",
     deg: "24deg",
   },
   {
@@ -129,10 +129,10 @@ const originBalloons = [
     color: "#45fff3",
     gradient: "linear-gradient(90deg, #ddfffd, #45fff3)",
     shadow: "#45fff3",
-    size: "90",
-    top: "45%",
-    left: "62vw",
-    deg: "30deg",
+    size: "88",
+    top: "380px",
+    left: "900px",
+    deg: "38deg",
   },
 ];
 
@@ -149,27 +149,14 @@ export default function App() {
   };
 
   const addBalloon = () => {
-    const originBalloonsPosition = {
-      top: 50,
-      left: 50,
-      width: 5,
-      height: 5,
-    };
-
-    let randomTop = getRandomNumber(
-      originBalloonsPosition.top - 40,
-      originBalloonsPosition.top + originBalloonsPosition.height + 20
-    );
-    let randomLeft = getRandomNumber(
-      originBalloonsPosition.left - 40,
-      originBalloonsPosition.left + originBalloonsPosition.width + 20
-    );
+    let randomTop = getRandomNumber(100, 500);
+    let randomLeft = getRandomNumber(100, 1200);
 
     let randomRotation;
-    if (randomLeft <= 50) {
-      randomRotation = getRandomNumber(-50, 0);
+    if (randomLeft <= window.innerWidth / 2) {
+      randomRotation = getRandomNumber(-30, 0);
     } else {
-      randomRotation = getRandomNumber(0, 50);
+      randomRotation = getRandomNumber(0, 30);
     }
 
     const { shadow, gradient } = getRandomColor();
@@ -182,8 +169,8 @@ export default function App() {
           color: shadow,
           gradient: gradient,
           size: getRandomSize(),
-          top: `${randomTop}%`,
-          left: `${randomLeft}vw`,
+          top: `${randomTop}px`,
+          left: `${randomLeft}px`,
           deg: `${randomRotation}deg`,
         },
       ];
@@ -205,7 +192,7 @@ export default function App() {
       setWindBlowing(false);
       setHouseFloating(false);
       setBalloons([]);
-    }, 3500);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -238,7 +225,9 @@ export default function App() {
 }
 
 const Container = styled.div`
-  overflow: hidden;
+  min-width: 1300px;
+  width: 100%;
+  height: 100%;
 `;
 
 const WindButton = styled.button`
