@@ -127,8 +127,6 @@ const floatingAnimation = keyframes`
 
 `;
 
-// styled-components의 StyleSheetManager를 사용하여 shouldForwardProp 옵션 설정
-// 이 옵션을 통해 원하는 속성들만 DOM 요소로 전달되도록 필터링할 수 있습니다.
 const CloudImage = styled.div.withConfig({
   shouldForwardProp: (prop) =>
     !["top", "left", "deg", "blur", "animationduration"].includes(prop),
