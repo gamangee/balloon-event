@@ -2,7 +2,7 @@ import React from "react";
 import styled, { StyleSheetManager } from "styled-components";
 import { useMode } from "../context/ModeContext";
 
-export default function Switch() {
+export default function ModeSwitch() {
   const { isDarkMode, toggleMode } = useMode();
   return (
     <StyleSheetManager shouldForwardProp={(prop) => prop !== "isdarkmode"}>

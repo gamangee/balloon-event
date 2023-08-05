@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const balloonVariants = (left) => {
   const leftPercentage = parseFloat(left.split("p")[0]);
-  const moveDirection = leftPercentage < window.innerWidth / 2 ? 4 : -4;
+  const moveDirection = leftPercentage < window.innerWidth / 2 ? 6 : -6;
 
   return {
     hidden: {

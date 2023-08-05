@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const originBallonVariants = (left) => {
   const leftPercentage = parseFloat(left.split("p")[0]);
-  const moveDirection = leftPercentage < window.innerWidth / 2 ? 4 : -4;
+  const moveDirection = leftPercentage < window.innerWidth / 2 ? 10 : -10;
   return {
     hidden: {
       scale: 1,
@@ -18,7 +18,7 @@ const originBallonVariants = (left) => {
       x: [moveDirection + "px", 0 + "px", moveDirection + "px"],
       y: "2px",
       transition: {
-        x: { repeat: Infinity, duration: 2 },
+        x: { repeat: Infinity, duration: 2, ease: [0.42, 0, 0.58, 1] },
         type: "spring",
         bounce: 0.3,
       },

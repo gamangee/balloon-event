@@ -5,8 +5,9 @@ import { darkTheme, lightTheme } from "./styles/theme";
 import Background from "./components/Background";
 import OriginBallons from "./components/OriginBallons";
 import AddBalloons from "./components/AddBalloons";
+import ModeSwitch from "./components/ModeSwitch";
+import Wind from "./components/Wind";
 import { v4 as id } from "uuid";
-import Switch from "./components/Switch";
 import {
   getRandomColor,
   getRandomNumber,
@@ -215,10 +216,8 @@ export default function App() {
           originBalloons={originBalloons}
           windBlowing={windBlowing}
         />
-        <Switch />
-        <WindButton onClick={handleWindButtonClick}>
-          <WindImage src="/images/wind.png" alt="wind" />
-        </WindButton>
+        <ModeSwitch />
+        <Wind handleWindButtonClick={handleWindButtonClick} />
       </Container>
     </ThemeProvider>
   );
@@ -228,29 +227,4 @@ const Container = styled.div`
   min-width: 1300px;
   width: 100%;
   height: 100%;
-`;
-
-const WindButton = styled.button`
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  width: 80px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  outline: none;
-  border: none;
-  background-color: #202677;
-  border-radius: 20px;
-  cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(9, 8, 57, 0.2);
-  transition: box-shadow 0.3s ease-in-out;
-  &:hover {
-    box-shadow: 0px 5px 15px rgba(9, 8, 57, 0.2);
-  }
-`;
-
-const WindImage = styled.img`
-  width: 90%;
 `;
