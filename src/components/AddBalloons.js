@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
 
 const balloonVariants = (left) => {
   const leftPercentage = parseFloat(left.split("v")[0]);
@@ -25,60 +25,47 @@ const balloonVariants = (left) => {
       },
     },
     exit: { scale: 0, opacity: 0, transition: { duration: 0.2 }, x: 0, y: 0 },
-    flyAway: { y: "-100vh", transition: { duration: 20 } },
+    flyAway: { y: "-100vh", transition: { duration: 2 } },
   };
 };
 
-export default function AddBalloons({
-  removeBalloon,
-  setBalloons,
-  balloons,
-  setHouseFloating,
-}) {
-  const [windBlowing, setWindBlowing] = useState(false);
-
+export default function AddBalloons({ removeBalloon, balloons, windBlowing }) {
   const handleRemoveBallonClick = (id) => {
     setTimeout(() => {
       removeBalloon(id);
     }, 100);
   };
 
-  const handleWindButtonClick = () => {
-    setWindBlowing(true);
-    if (balloons.length >= 15) {
-      setHouseFloating(true);
-    }
-    setTimeout(() => {
-      setWindBlowing(false);
-      setBalloons([]);
-    }, 20000);
-  };
+  useEffect(() => {
+    document.body.style.overflow = windBlowing ? "hidden" : "visible";
+
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, [windBlowing]);
 
   return (
-    <>
-      <WindButton onClick={handleWindButtonClick}>Blow Wind</WindButton>
-      <AnimatePresence>
-        {balloons?.map((balloon) => (
-          <BalloonShape
-            key={balloon.id}
-            top={balloon.top}
-            left={balloon.left}
-            deg={balloon.deg}
-          >
-            <Balloon
-              color={balloon.color}
-              gradient={balloon.gradient}
-              size={balloon.size}
-              onClick={() => handleRemoveBallonClick(balloon.id)}
-              variants={balloonVariants(balloon.left)}
-              initial="hidden"
-              animate={windBlowing ? "flyAway" : "visible"}
-              exit="exit"
-            />
-          </BalloonShape>
-        ))}
-      </AnimatePresence>
-    </>
+    <AnimatePresence>
+      {balloons?.map((balloon) => (
+        <BalloonShape
+          key={balloon.id}
+          top={balloon.top}
+          left={balloon.left}
+          deg={balloon.deg}
+        >
+          <Balloon
+            color={balloon.color}
+            gradient={balloon.gradient}
+            size={balloon.size}
+            onClick={() => handleRemoveBallonClick(balloon.id)}
+            variants={balloonVariants(balloon.left)}
+            initial="hidden"
+            animate={windBlowing ? "flyAway" : "visible"}
+            exit="exit"
+          />
+        </BalloonShape>
+      ))}
+    </AnimatePresence>
   );
 }
 
@@ -117,10 +104,4 @@ const Balloon = styled(motion.div).withConfig({
     border-bottom: 6px solid ${(props) => props.color};
     transform: translate(-50%);
   }
-`;
-
-const WindButton = styled.button`
-  position: absolute;
-  top: 0;
-  left: 0;
 `;

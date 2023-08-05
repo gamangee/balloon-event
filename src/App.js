@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { useMode } from "./context/ModeContext";
 import { darkTheme, lightTheme } from "./styles/theme";
 import Background from "./components/Background";
@@ -65,6 +65,7 @@ export default function App() {
 
   const [balloons, setBalloons] = useState([]);
   const [houseFloating, setHouseFloating] = useState(false);
+  const [windBlowing, setWindBlowing] = useState(false);
 
   const handleHouseClick = () => {
     addBalloon();
@@ -119,20 +120,64 @@ export default function App() {
     );
   };
 
+  const handleWindButtonClick = () => {
+    setWindBlowing(true);
+    if (balloons.length >= 15) {
+      setHouseFloating(true);
+    }
+    setTimeout(() => {
+      setWindBlowing(false);
+      setBalloons([]);
+    }, 20000);
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <Background
-        handleHouseClick={handleHouseClick}
-        houseFloating={houseFloating}
-      />
-      <AddBalloons
-        removeBalloon={removeBalloon}
-        balloons={balloons}
-        setBalloons={setBalloons}
-        setHouseFloating={setHouseFloating}
-      />
-      <OriginBallons />
-      <Switch />
+      <Container>
+        <Background
+          handleHouseClick={handleHouseClick}
+          houseFloating={houseFloating}
+        />
+        <AddBalloons
+          removeBalloon={removeBalloon}
+          balloons={balloons}
+          windBlowing={windBlowing}
+        />
+        <OriginBallons />
+        <Switch />
+        <WindButton onClick={handleWindButtonClick}>
+          <WindImage src="/images/wind.png" alt="wind" />
+        </WindButton>
+      </Container>
     </ThemeProvider>
   );
 }
+
+const Container = styled.div`
+  overflow: hidden;
+`;
+
+const WindButton = styled.button`
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  background-color: #202677;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(9, 8, 57, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0px 5px 15px rgba(9, 8, 57, 0.2);
+  }
+`;
+
+const WindImage = styled.img`
+  width: 90%;
+`;

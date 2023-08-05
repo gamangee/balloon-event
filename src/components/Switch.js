@@ -20,8 +20,8 @@ export default function Switch() {
 
 const SwitchButton = styled.label`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 30px;
   width: 55px;
   height: 30px;
 `;
