@@ -38,11 +38,6 @@ export default function AddBalloons({
   const [windBlowing, setWindBlowing] = useState(false);
 
   const handleRemoveBallonClick = (id) => {
-    setBalloons((prevBalloons) =>
-      prevBalloons.map((balloon) =>
-        balloon.id === id ? { ...balloon, popped: true } : balloon
-      )
-    );
     setTimeout(() => {
       removeBalloon(id);
     }, 100);
@@ -75,7 +70,6 @@ export default function AddBalloons({
               gradient={balloon.gradient}
               size={balloon.size}
               onClick={() => handleRemoveBallonClick(balloon.id)}
-              popped={balloon.popped.toString()}
               variants={balloonVariants(balloon.left)}
               initial="hidden"
               animate={windBlowing ? "flyAway" : "visible"}

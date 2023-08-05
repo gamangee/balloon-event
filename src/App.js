@@ -6,6 +6,7 @@ import Background from "./components/Background";
 import OriginBallons from "./components/OriginBallons";
 import AddBalloons from "./components/AddBalloons";
 import { v4 as id } from "uuid";
+import Switch from "./components/Switch";
 
 const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -131,6 +132,7 @@ export default function App() {
         setHouseFloating={setHouseFloating}
       />
       <OriginBallons />
+      <Switch />
     </ThemeProvider>
   );
 }

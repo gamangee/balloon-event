@@ -7,7 +7,7 @@ export default function OriginBallons() {
     <>
       {balloons?.map((balloon, index) => (
         <BalloonShape
-          key={id()}
+          key={balloon.id}
           top={balloon.top}
           left={balloon.left}
           deg={balloon.deg}
@@ -27,6 +27,7 @@ export default function OriginBallons() {
 
 const balloons = [
   {
+    id: id(),
     color: "#ffd107",
     gradient: "linear-gradient(135deg, #ffffc1, #ffff00)",
     shadow: "#ffd103",
@@ -36,6 +37,7 @@ const balloons = [
     deg: "-26deg",
   },
   {
+    id: id(),
     color: "#62ff07",
     gradient: "linear-gradient(155deg, #eeffe4, #62ff07)",
     shadow: "#62ff07",
@@ -45,6 +47,7 @@ const balloons = [
     deg: "-30deg",
   },
   {
+    id: id(),
     color: "#00d0ff",
     gradient: "linear-gradient(95deg, #c4f7ff, #00d0ff)",
     shadow: "#00d0ff",
@@ -54,6 +57,7 @@ const balloons = [
     deg: "-15deg",
   },
   {
+    id: id(),
     color: "#ff5752",
     gradient: "linear-gradient(125deg, #ffc7c0, #ff5752)",
     shadow: "#ff5752",
@@ -63,6 +67,7 @@ const balloons = [
     deg: "-5deg",
   },
   {
+    id: id(),
     color: "#f399ff",
     gradient: "linear-gradient(110deg, #fbe2ff, #f399ff)",
     shadow: "#f399ff",
@@ -72,6 +77,7 @@ const balloons = [
     deg: "-10deg",
   },
   {
+    id: id(),
     color: "#9881ff",
     gradient: "linear-gradient(110deg, #e9e4ff, #9881ff)",
     shadow: "#9881ff",
@@ -81,6 +87,7 @@ const balloons = [
     deg: "7deg",
   },
   {
+    id: id(),
     color: "#ffd107",
     gradient: "linear-gradient(135deg, #ffffc1, #ffff00)",
     shadow: "#ffd103",
@@ -90,6 +97,7 @@ const balloons = [
     deg: "8deg",
   },
   {
+    id: id(),
     color: "#00dc25",
     gradient: "linear-gradient(125deg, #cfffcf, #00dc25)",
     shadow: "#00dc25",
@@ -99,6 +107,7 @@ const balloons = [
     deg: "16deg",
   },
   {
+    id: id(),
     color: "#ff6e07",
     gradient: "linear-gradient(155deg, #ffe0c9, #ff6e07)",
     shadow: "#ff6e07",
@@ -108,6 +117,7 @@ const balloons = [
     deg: "15deg",
   },
   {
+    id: id(),
     color: "#ff99e7",
     gradient: "linear-gradient(110deg, #ffe2f8, #ff99e7)",
     shadow: "#ff99e7",
@@ -117,6 +127,7 @@ const balloons = [
     deg: "30deg",
   },
   {
+    id: id(),
     color: "#1a85ff",
     gradient: "linear-gradient(95deg, #afd4ff, #1a85ff)",
     shadow: "#1a85ff",
@@ -126,6 +137,7 @@ const balloons = [
     deg: "24deg",
   },
   {
+    id: id(),
     color: "#45fff3",
     gradient: "linear-gradient(90deg, #ddfffd, #45fff3)",
     shadow: "#45fff3",
