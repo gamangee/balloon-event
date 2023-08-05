@@ -1,13 +1,19 @@
-const theme = {
+const lightTheme = {
   colors: {
-    primary: "#007bff",
-    secondary: "#6c757d",
-    success: "#28a745",
-    error: "#dc3545",
-  },
-  fonts: {
-    main: "Arial, sans-serif",
+    background: "#FFFFFF",
+    text: "#222222",
+    skyblueTop: "#00BFFF",
+    skyblueBottom: "#87CEFA",
   },
 };
 
-export default theme;
+const darkTheme = {
+  colors: {
+    background: "#222222",
+    text: "#FFFFFF",
+    skyblueTop: "#000080",
+    skyblueBottom: "#1E90FF",
+  },
+};
+
+export { lightTheme, darkTheme };
