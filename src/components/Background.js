@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import Clouds from "./Clouds";
 
 export default function Background() {
   return (
     <Container>
+      <Clouds />
       <HouseImage src="/images/home.png"></HouseImage>
     </Container>
   );
@@ -21,8 +23,7 @@ const HouseImage = styled.img`
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, 0);
   height: 50vh;
+  transform: translate(-50%, 0);
   cursor: pointer;
-  z-index: 10;
 `;
