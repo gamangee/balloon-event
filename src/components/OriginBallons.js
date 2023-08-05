@@ -44,7 +44,6 @@ const balloons = [
     left: "35vw",
     deg: "-30deg",
   },
-
   {
     color: "#00d0ff",
     gradient: "linear-gradient(95deg, #c4f7ff, #00d0ff)",
@@ -108,7 +107,6 @@ const balloons = [
     left: "53vw",
     deg: "15deg",
   },
-
   {
     color: "#ff99e7",
     gradient: "linear-gradient(110deg, #ffe2f8, #ff99e7)",
