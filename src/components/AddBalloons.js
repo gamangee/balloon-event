@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -25,7 +25,7 @@ const balloonVariants = (left) => {
       },
     },
     exit: { scale: 0, opacity: 0, transition: { duration: 0.2 }, x: 0, y: 0 },
-    flyAway: { y: "-100vh", transition: { duration: 2 } },
+    flyAway: { y: "-100vh", transition: { duration: 1 } },
   };
 };
 
@@ -35,14 +35,6 @@ export default function AddBalloons({ removeBalloon, balloons, windBlowing }) {
       removeBalloon(id);
     }, 100);
   };
-
-  useEffect(() => {
-    document.body.style.overflow = windBlowing ? "hidden" : "visible";
-
-    return () => {
-      document.body.style.overflow = "visible";
-    };
-  }, [windBlowing]);
 
   return (
     <AnimatePresence>

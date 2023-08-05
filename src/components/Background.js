@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const houseVariants = {
   initial: { x: "-50%", y: "0" },
-  flyAway: { y: "-100vh", transition: { duration: 40 } },
+  flyAway: { y: "-100vh", transition: { duration: 3 } },
 };
 
 export default function Background({ handleHouseClick, houseFloating }) {

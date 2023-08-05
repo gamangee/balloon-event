@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useMode } from "./context/ModeContext";
 import { darkTheme, lightTheme } from "./styles/theme";
@@ -7,57 +7,134 @@ import OriginBallons from "./components/OriginBallons";
 import AddBalloons from "./components/AddBalloons";
 import { v4 as id } from "uuid";
 import Switch from "./components/Switch";
+import {
+  getRandomColor,
+  getRandomNumber,
+  getRandomSize,
+} from "./utils/getRandoms";
 
-const getRandomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const getRandomColor = () => {
-  const colors = [
-    {
-      shadow: "#ff37ff",
-      gradient: "linear-gradient(155deg, #FFC6FF, #ff37ff)",
-    },
-    {
-      shadow: "#ff5855",
-      gradient: "linear-gradient(155deg, #FFAEAD, #ff5855)",
-    },
-    {
-      shadow: "#ff9e27",
-      gradient: "linear-gradient(155deg, #ffead0, #ff9e27)",
-    },
-    {
-      shadow: "#ffd027",
-      gradient: "linear-gradient(155deg, #fdffca, #ffd027)",
-    },
-    {
-      shadow: "#7dff5c",
-      gradient: "linear-gradient(155deg, #CBFDBE, #7dff5c)",
-    },
-    {
-      shadow: "#22e178",
-      gradient: "linear-gradient(155deg, #A5FFCE, #22e178)",
-    },
-    {
-      shadow: "#55f1ff",
-      gradient: "linear-gradient(155deg, #9CF6FF, #55f1ff)",
-    },
-    {
-      shadow: "#5b9aff",
-      gradient: "linear-gradient(155deg, #A0C4FF, #5b9aff)",
-    },
-    {
-      shadow: "#816bff",
-      gradient: "linear-gradient(155deg, #BDB2FF, #816bff)",
-    },
-  ];
-  return colors[Math.floor(Math.random() * colors.length)];
-};
-
-const getRandomSize = () => {
-  const sizes = ["50", "60", "70", "80", "90", "100"];
-  return sizes[Math.floor(Math.random() * sizes.length)];
-};
+const originBalloons = [
+  {
+    id: id(),
+    color: "#ffd107",
+    gradient: "linear-gradient(135deg, #ffffc1, #ffff00)",
+    shadow: "#ffd103",
+    size: "90",
+    top: "38%",
+    left: "32vw",
+    deg: "-26deg",
+  },
+  {
+    id: id(),
+    color: "#62ff07",
+    gradient: "linear-gradient(155deg, #eeffe4, #62ff07)",
+    shadow: "#62ff07",
+    size: "80",
+    top: "45%",
+    left: "35vw",
+    deg: "-30deg",
+  },
+  {
+    id: id(),
+    color: "#00d0ff",
+    gradient: "linear-gradient(95deg, #c4f7ff, #00d0ff)",
+    shadow: "#00d0ff",
+    size: "70",
+    top: "20%",
+    left: "36vw",
+    deg: "-15deg",
+  },
+  {
+    id: id(),
+    color: "#ff5752",
+    gradient: "linear-gradient(125deg, #ffc7c0, #ff5752)",
+    shadow: "#ff5752",
+    size: "100",
+    top: "20%",
+    left: "42vw",
+    deg: "-5deg",
+  },
+  {
+    id: id(),
+    color: "#f399ff",
+    gradient: "linear-gradient(110deg, #fbe2ff, #f399ff)",
+    shadow: "#f399ff",
+    size: "60",
+    top: "35%",
+    left: "40vw",
+    deg: "-10deg",
+  },
+  {
+    id: id(),
+    color: "#9881ff",
+    gradient: "linear-gradient(110deg, #e9e4ff, #9881ff)",
+    shadow: "#9881ff",
+    size: "80",
+    top: "28%",
+    left: "46vw",
+    deg: "7deg",
+  },
+  {
+    id: id(),
+    color: "#ffd107",
+    gradient: "linear-gradient(135deg, #ffffc1, #ffff00)",
+    shadow: "#ffd103",
+    size: "70",
+    top: "42%",
+    left: "48vw",
+    deg: "8deg",
+  },
+  {
+    id: id(),
+    color: "#00dc25",
+    gradient: "linear-gradient(125deg, #cfffcf, #00dc25)",
+    shadow: "#00dc25",
+    size: "90",
+    top: "20%",
+    left: "55vw",
+    deg: "16deg",
+  },
+  {
+    id: id(),
+    color: "#ff6e07",
+    gradient: "linear-gradient(155deg, #ffe0c9, #ff6e07)",
+    shadow: "#ff6e07",
+    size: "80",
+    top: "29%",
+    left: "53vw",
+    deg: "15deg",
+  },
+  {
+    id: id(),
+    color: "#ff99e7",
+    gradient: "linear-gradient(110deg, #ffe2f8, #ff99e7)",
+    shadow: "#ff99e7",
+    size: "90",
+    top: "32%",
+    left: "60vw",
+    deg: "30deg",
+  },
+  {
+    id: id(),
+    color: "#1a85ff",
+    gradient: "linear-gradient(95deg, #afd4ff, #1a85ff)",
+    shadow: "#1a85ff",
+    size: "80",
+    top: "46%",
+    left: "58vw",
+    deg: "24deg",
+  },
+  {
+    id: id(),
+    color: "#45fff3",
+    gradient: "linear-gradient(90deg, #ddfffd, #45fff3)",
+    shadow: "#45fff3",
+    size: "90",
+    top: "45%",
+    left: "62vw",
+    deg: "30deg",
+  },
+];
 
 export default function App() {
   const { isDarkMode } = useMode();
@@ -108,7 +185,6 @@ export default function App() {
           top: `${randomTop}%`,
           left: `${randomLeft}vw`,
           deg: `${randomRotation}deg`,
-          popped: false,
         },
       ];
     });
@@ -122,14 +198,19 @@ export default function App() {
 
   const handleWindButtonClick = () => {
     setWindBlowing(true);
-    if (balloons.length >= 15) {
+    if (balloons.length >= 15 && originBalloons) {
       setHouseFloating(true);
     }
     setTimeout(() => {
       setWindBlowing(false);
+      setHouseFloating(false);
       setBalloons([]);
-    }, 20000);
+    }, 3500);
   };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -139,11 +220,14 @@ export default function App() {
           houseFloating={houseFloating}
         />
         <AddBalloons
-          removeBalloon={removeBalloon}
           balloons={balloons}
+          removeBalloon={removeBalloon}
           windBlowing={windBlowing}
         />
-        <OriginBallons />
+        <OriginBallons
+          originBalloons={originBalloons}
+          windBlowing={windBlowing}
+        />
         <Switch />
         <WindButton onClick={handleWindButtonClick}>
           <WindImage src="/images/wind.png" alt="wind" />
